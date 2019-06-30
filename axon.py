@@ -47,9 +47,9 @@ sendMessage.restype  = None
 recvMessage = lib.recvMessage
 recvMessage.argtypes = [
 	ctypes.c_void_p, 
-	ctypes.c_int, 
-	ctypes.c_int, 
-	ctypes.c_int
+	ctypes.POINTER(ctypes.c_int), 
+	ctypes.POINTER(ctypes.c_int), 
+	ctypes.POINTER(ctypes.c_int)
 ]
 recvMessage.restype  = ctypes.c_char_p
 
@@ -84,9 +84,10 @@ class Axon:
 			ctypes.byref(kind)
 		)
 
-		bytes_type = ctypes.c_byte * length
-		return bytearray(bytes_type(_bytes)), code, kind
+		bytes_type = ctypes.c_byte * int(length.value)
+		return _bytes, code, kind
 
 	def __del__(self):
-		destroyInstance(self.c_Axon)
+		if not self.child:
+			destroyInstance(self.c_Axon)
 		

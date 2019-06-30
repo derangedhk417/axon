@@ -18,10 +18,15 @@ import axon
 
 
 if __name__ == '__main__':
-	print("[PYTHON] \taxon_test.py running\n")
+	print("[PYTHON] \taxon_test.py running")
 
-	channel = axon.Axon('test', is_child=True)
+	channel = axon.Axon('test2', is_child=True)
+	b, c, k = channel.RecvMessage()
 
-	print("[PYTHON] \tchannel initialized\n")
+	print(b)
+	print(c)
+	print(k)
+
+	print("[PYTHON] \tchannel initialized")
 
 	del channel

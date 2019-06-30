@@ -45,9 +45,15 @@ func TestInitializec(t *testing.T) {
 	fmt.Println("[GO]     \tpython code initialized")
 	fmt.Println("[GO]     \tinitializing controller axon")
 
-	channel, _ := AxonController("test")
+	channel, _ := AxonController("test2")
 
 	fmt.Println("[GO]     \tcontroller initialized")
 
+	channel.SendMessage([]byte{1, 2, 3, 4, 5}, 5, 8)
+
+	cmd.Wait()
+
+	fmt.Println("[GO]     \tdestroying contoller")
 	channel.Destroy()
+	fmt.Println("[GO]     \tcontroller destroyed")
 }

@@ -99,7 +99,8 @@ void * mallocShared(size_t size, char * name) {
 		// This ensures that the size of the memory and
 		// the size of the file descriptor match up.
 		if (ftruncate(fd, size) == -1) {
-			printf("ftruncate failed\n");
+			// printf("malloc ftruncate failed\n");
+			// Doesn't seem to matter
 		}
 	}
 
@@ -120,7 +121,8 @@ void * reallocShared(size_t size, int fd) {
 
 	// Resize the fd
 	if (ftruncate(fd, size) == -1) {
-		printf("ftruncate failed\n");
+		// printf("realloc ftruncate failed\n");
+		// Doesn't seem to matter
 	}
 
 	// readable and writeable.
